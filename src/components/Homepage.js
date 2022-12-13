@@ -27,6 +27,8 @@ export default function Homepage() {
   const [keep, setKeep] = useState(0);
   const [allRoun, setAllRoun] = useState(0);
 
+  const [selected, setSelected] = useState([]);
+
   useEffect(() => {
     fetch(
       "https://leaguex.s3.ap-south-1.amazonaws.com/task/fantasy-sports/Get_All_Players_of_match.json"
@@ -54,7 +56,8 @@ export default function Homepage() {
   ) => {
     //console.log(point)
 
-    if (totalPlayers <= 10) {
+    if (totalPlayers < 11) {
+      setSelected([...selected, playerId]);
       if (melbournePlayer <= 7 && perthPlayer <= 7) {
         if (playerTeam === "Melbourne Stars") {
           if (melbournePlayer < 7) {
@@ -72,6 +75,7 @@ export default function Homepage() {
                 },
               ]);
               parseFloat(setCrLeft(crLeft - Number(playerCr)));
+
               if (playerRole === "Batsman") {
                 setBat(bat + 1);
               } else if (playerRole === "Bowler") {
@@ -194,8 +198,17 @@ export default function Homepage() {
                     `${i.team_name}`
                   )
                 }
+                style={{
+                  backgroundColor: selected.includes(`${i.id}`)
+                    ? "yellow"
+                    : "white",
+                }}
               >
-                <div>{i.short_name}</div>
+                <div className="credits">
+                  <strong>{i.short_name}</strong>
+                  <div>{i.team_name}</div>
+                </div>
+
                 <div className="credits">
                   <span>credit</span>
                   <span>{i.event_player_credit}</span>
@@ -222,8 +235,16 @@ export default function Homepage() {
                     `${i.team_name}`
                   )
                 }
+                style={{
+                  backgroundColor: selected.includes(`${i.id}`)
+                    ? "yellow"
+                    : "white",
+                }}
               >
-                <div>{i.short_name}</div>
+                <div className="credits">
+                  <strong>{i.short_name}</strong>
+                  <div>{i.team_name}</div>
+                </div>
                 <div className="credits">
                   <span>credit</span>
                   <span>{i.event_player_credit}</span>
@@ -252,8 +273,16 @@ export default function Homepage() {
                     `${i.team_name}`
                   )
                 }
+                style={{
+                  backgroundColor: selected.includes(`${i.id}`)
+                    ? "yellow"
+                    : "white",
+                }}
               >
-                <div>{i.short_name}</div>
+                <div className="credits">
+                  <strong>{i.short_name}</strong>
+                  <div>{i.team_name}</div>
+                </div>
                 <div className="credits">
                   <span>credit</span>
                   <span>{i.event_player_credit}</span>
@@ -280,8 +309,16 @@ export default function Homepage() {
                     `${i.team_name}`
                   )
                 }
+                style={{
+                  backgroundColor: selected.includes(`${i.id}`)
+                    ? "yellow"
+                    : "white",
+                }}
               >
-                <div>{i.short_name}</div>
+                <div className="credits">
+                  <strong>{i.short_name}</strong>
+                  <div>{i.team_name}</div>
+                </div>
                 <div className="credits">
                   <span>credit</span>
                   <span>{i.event_player_credit}</span>
